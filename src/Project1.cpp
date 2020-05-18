@@ -12,10 +12,13 @@
 
 //function to run Knights Tour Problem
 int KnightsTour();
+
 //core function to solve
 int solve(int x, int y, int moveI, int sol[N][N], int moveX[], int moveY[]);
+
 //checks if move is a safe move
 int safe(int x, int y, int solution[N][N]);
+
 //prints solution to terminal
 void printSolution(int solution[N][N]);
 
@@ -74,14 +77,25 @@ int safe(int x, int y, int solution[N][N]) {
 
 //recursive function that
 int solve(int x, int y, int moveI, int solution[N][N], int moveX[], int moveY[]) {
+
+	//initialize next moves
 	int nextX, nextY;
+
+	//condition that passes when the matrix is full and problem is solved
 	if(moveI == N*N) {
 		return 1;
 	}
 
+	//main logic
 	for(int i = 0; i < N; i++) {
+
+		//set next moves
 		nextX = x + moveX[i];
 		nextY = y + moveY[i];
+
+		/* condition to check if solution is safe, if not set location to = -1
+		*  and run again with next set of moves. If solution is safe save the
+		*/
 		if(safe(nextX, nextY, solution)) {
 			solution[nextX][nextY] = moveI;
 			if(solve(nextX, nextY, moveI+1, solution, moveX, moveY) == 1) {
